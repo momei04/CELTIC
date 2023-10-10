@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;600;900&family=Titillium+Web:wght@700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="template/css/style.css">
     <title>Document</title>
 </head>
@@ -28,32 +30,82 @@
 <div class="header_container">
     <h1 class="header_container-title">Celtic</h1>
 </div>
+
 <div class="content-container">
     <!--Slider-->
-    <div class="slider">
-        <div class="slide">
-            <img src="https://www.lequipe.fr/_medias/img-photo-jpg/kyogo-furuhashi-a-droite-a-inscrit-un-double-ce-samedi-contre-les-rangers-reuters/1500000001771142/0:0,1998:1332-828-552-75/2682b.jpg" alt="">
+    <section id="main-slider-container">
+        <div id="slider-container" class="slider-container">
+            <!-- slide  -->
+            <div>
+                <div class="layer"></div>
+                <h1>Stadium</h1>
+            </div>
+            <div>
+                <div class="layer"></div>
+                <h1>Squad</h1>
+            </div>
+            <div>
+                <div class="layer"></div>
+                <h1>Become a member</h1>
+            </div>
+            <div>
+                <div class="layer"></div>
+                <h1>Tickets & Fixtures</h1>
+            </div>
+            <div>
+                <div class="layer"></div>
+                <h1>Shop</h1>
+            </div>
         </div>
-        <div class="slide">
-            <img src="https://abseits.at/wp-content/uploads/Celtic-Glasgow1.jpg" alt="">
-        </div>
-        <div class="slide">
-            <img src="https://imagenes.elpais.com/resizer/7BzUSgVtyFoWltxWYHhwM3zPTnA=/1200x0/cloudfront-eu-central-1.images.arcpublishing.com/prisa/E25ULTIKLY2DKNPXY2NPYNDIKQ.jpg" alt="">
-        </div>
-        <div class="slide">
-            <img src="https://tuttocalciomercato24.com/wp-content/uploads/2021/12/ryan-christie-celtic-scozia-premier-europa-league-1.jpg" alt="">
-        </div>
-        <div class="slide">
+    </section>
+
+</div>
+<section>
+    <div class="form-container">
+        <div class="img-container">
             <img src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Celtic_Park3.jpg" alt="">
         </div>
-        <div class="slide">
-            <img src="https://cdn.thecelticblog.com/wp-content/uploads/2022/08/2022-07-31T170749Z_942239235_UP1EI7V1BKZVK_RTRMADP_3_SOCCER-SCOTLAND-CEL-ABE-REPORT-scaled.jpg?width=1201" alt="">
-        </div>
-        <div class="slide">
-            <img src="https://www.absolut-sport.com/fileadmin/_processed_/a/1/csm_Celtic_Park_-_Celtic_Glasgow_fe8049ef3d.jpg?_=1498568518" alt="">
-        </div>
+        <form>
+            <div class="title-container">
+                <h1 class="form-title">Log In</h1>
+                <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="container">
+                <input placeholder="E-Mail" type="text" name="email">
+                <input placeholder="Placeholder" type="password" name="password">
+                <button type="submit">Submit</button>
+            </div>
+        </form>
     </div>
-</div>
+</section>
 
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+    let imgSlider = document.getElementById("slider-container");
+    let imgSliderMain = document.getElementById("main-slider-container");
+
+    let windowWidth = window.innerWidth;
+    let calculateSliderX =
+        imgSlider.children.length * imgSlider.children[0].offsetWidth - windowWidth;
+
+    let imgSliderTimeline = gsap.timeline({
+        default: {
+            ease: "none",
+        },
+        scrollTrigger: {
+            trigger: imgSliderMain,
+            pin: true,
+            start: "top top",
+            end: "+=200%",
+            scrub: 1,
+        },
+    });
+    imgSliderTimeline.to(imgSlider, {
+        x: -calculateSliderX,
+    });
+</script>
 </body>
 </html>
